@@ -1,5 +1,6 @@
 import pygame as pg
 import sys
+from tests import run_tests
 from map import GameField, Map
 from settings import *
 
@@ -52,6 +53,7 @@ class Game:
 
 
 def main():
+    run_tests()
     game = Game()
     game.run()
 

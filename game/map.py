@@ -48,7 +48,7 @@ class GameField:
                     continue
                 if row == r and col == c:
                     continue
-                total_around_mines += self.field[row][col].mine
+                total_around_mines += int(self.field[row][col].mine)
         return total_around_mines
 
     def check_coords(self, pos: tuple, click: int):
