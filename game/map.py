@@ -26,9 +26,10 @@ class Map:
         self.screen.fill(SCR_FILL_COLOR)
         self.draw_map_net()
 
-    def draw_cell(self, r_coords: tuple, image_path: str = IMAGE_ERROR, around_mines=True):
+    def draw_cell(self, r_coords: tuple, rect_color, line_color, image_path: str = IMAGE_ERROR, around_mines=True):
         rect = pg.Rect(r_coords)
-        pg.draw.rect(self.screen, RECT_COLOR, rect, 0)
+        pg.draw.rect(self.screen, rect_color, rect, 0)
+        pg.draw.rect(self.screen, line_color, rect, 1)
 
         if around_mines:
             image = pg.image.load(image_path)
@@ -36,3 +37,22 @@ class Map:
             image_rect.centerx = rect.centerx
             image_rect.centery = rect.centery
             self.screen.blit(image, image_rect)
+
+    def cell_mark_mine(self, cell):
+        self.draw_cell(cell.rect_coords,
+                       rect_color=RECT_COLOR_FLAG,
+                       line_color=LINE_COLOR,
+                       image_path=IMAGE_FLAG)
+
+    def cell_remark_mine(self, cell):
+        self.draw_cell(cell.rect_coords,
+                       rect_color=SCR_FILL_COLOR,
+                       line_color=LINE_COLOR,
+                       image_path=IMAGE_ERROR,
+                       around_mines=False)
+
+    def draw_mine(self, cell):
+        self.draw_cell(cell.rect_coords,
+                       rect_color=RECT_COLOR_MINE,
+                       line_color=LINE_COLOR,
+                       image_path=IMAGE_MINE)

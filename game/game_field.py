@@ -50,41 +50,53 @@ class GameField:
             raise ValueError('total_around_mines must be between 0 and 8')
         return total_around_mines
 
-    def check_coords(self, pos: tuple, click: int):
-        row = int(pos[0] // CELL_SIZE)
-        col = int(pos[1] // CELL_SIZE)
-        cell = self.field[row][col]
-        if cell.open is not True:
-            if click == LEFT_MB:
-                self.try_to_open_cell(cell)
-                cell.open = True
-            elif click == RIGHT_MB:
-                self.cell_mark_mine(cell)
-                cell.open = True
-
     def try_to_open_cell(self, cell):
         if cell.mine:
-            # self.game.new_game()
-            self.cell_mark_mine(cell)
+            self.game.map.draw_mine(cell)
             self.open_all_cell()
         elif cell.around_mines == 0:
             self.game.map.draw_cell(cell.rect_coords,
+                                    rect_color=RECT_COLOR,
+                                    line_color=LINE_COLOR,
                                     around_mines=False)
             self.open_around_cells(cell)
         else:
             self.game.map.draw_cell(cell.rect_coords,
+                                    rect_color=RECT_COLOR,
+                                    line_color=LINE_COLOR,
                                     image_path=number_images_dict.get(cell.around_mines,
                                                                       IMAGE_ERROR))
+
+    def check_coords(self, pos: tuple, click: int):
+        row = int(pos[0] // CELL_SIZE)
+        col = int(pos[1] // CELL_SIZE)
+        cell = self.field[row][col]
+
+        if click == LEFT_MB:
+            if cell.open is not True:
+                self.try_to_open_cell(cell)
+                cell.open = True
+        elif click == RIGHT_MB:
+            if cell.open:
+                self.game.map.cell_remark_mine(cell)
+                cell.open = False
+            else:
+                self.game.map.cell_mark_mine(cell)
+                cell.open = True
 
     def open_cell(self, cell):
         if cell.open is not True:
             cell.open = True
             if cell.around_mines == 0:
                 self.game.map.draw_cell(cell.rect_coords,
+                                        rect_color=RECT_COLOR,
+                                        line_color=LINE_COLOR,
                                         around_mines=False)
                 self.open_around_cells(cell)
             else:
                 self.game.map.draw_cell(cell.rect_coords,
+                                        rect_color=RECT_COLOR,
+                                        line_color=LINE_COLOR,
                                         image_path=number_images_dict.get(cell.around_mines,
                                                                           IMAGE_ERROR))
 
@@ -99,17 +111,11 @@ class GameField:
                     continue
                 self.open_cell(self.field[row][col])
 
-    def cell_mark_mine(self, cell):
-        self.game.map.draw_cell(cell.rect_coords,
-                                image_path=IMAGE_MINE)
-
     def open_all_cell(self):
         for row in range(self.N):
             for col in range(self.N):
                 cell = self.field[row][col]
-                if cell.open:
-                    continue
                 if cell.mine:
-                    self.cell_mark_mine(cell)
+                    self.game.map.draw_mine(cell)
                 else:
                     self.open_cell(cell)

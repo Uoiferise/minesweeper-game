@@ -2,15 +2,17 @@
 GAME_TITLE = 'Minesweeper game'.upper()
 RES = WIDTH, HEIGHT = 800, 800
 
-AMOUNT_OF_CELLS = 20
-AMOUNT_OF_MINES = 55
+AMOUNT_OF_CELLS = 10
+AMOUNT_OF_MINES = 12
 
 CELL_SIZE = WIDTH / AMOUNT_OF_CELLS
 LINE_WIGHT = 3
 
-LINE_COLOR = (173, 181, 189)
-RECT_COLOR = (173, 181, 189)
-SCR_FILL_COLOR = (33, 37, 41)
+LINE_COLOR = (50, 50, 50)
+RECT_COLOR = (150, 150, 150)
+RECT_COLOR_FLAG = (249, 199, 79)
+RECT_COLOR_MINE = (239, 35, 60)
+SCR_FILL_COLOR = (0, 0, 0)
 
 number_images_dict = {
     0: 'images/number_0.png',
@@ -26,6 +28,7 @@ number_images_dict = {
 }
 IMAGE_MINE = 'images/mine.png'
 IMAGE_ERROR = 'images/error.png'
+IMAGE_FLAG = 'images/flag.png'
 
 # game control
 LEFT_MB = 1
