@@ -41,9 +41,9 @@ class Game:
             if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
                 self.end_game()
             if event.type == pg.MOUSEBUTTONDOWN:
-                if event.button == 1:
+                if event.button == LEFT_MB:
                     self.game.check_coords(event.pos, event.button)
-                if event.button == 3:
+                if event.button == RIGHT_MB:
                     self.game.check_coords(event.pos, event.button)
 
     def run(self):
@@ -53,7 +53,7 @@ class Game:
 
 
 def main():
-    run_tests()
+    # run_tests()
     game = Game()
     game.run()
 

@@ -1,9 +1,9 @@
 # game settings
 GAME_TITLE = 'Minesweeper game'.upper()
-RES = WIDTH, HEIGHT = 1200, 1200
+RES = WIDTH, HEIGHT = 800, 800
 
-AMOUNT_OF_CELLS = 30
-AMOUNT_OF_MINES = 100
+AMOUNT_OF_CELLS = 15
+AMOUNT_OF_MINES = 25
 
 CELL_SIZE = WIDTH / AMOUNT_OF_CELLS
 
@@ -25,3 +25,7 @@ number_images_dict = {
 }
 IMAGE_MINE = 'images/mine.png'
 IMAGE_ERROR = 'images/error.png'
+
+# game control
+LEFT_MB = 1
+RIGHT_MB = 3
