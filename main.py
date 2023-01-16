@@ -1,7 +1,8 @@
 import pygame as pg
 import sys
 from tests import run_tests
-from map import GameField, Map
+from map import Map
+from game_field import GameField
 from settings import *
 
 
@@ -53,7 +54,7 @@ class Game:
 
 
 def main():
-    # run_tests()
+    run_tests()
     game = Game()
     game.run()
 

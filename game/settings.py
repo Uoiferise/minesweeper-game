@@ -7,9 +7,9 @@ AMOUNT_OF_MINES = 25
 
 CELL_SIZE = WIDTH / AMOUNT_OF_CELLS
 
-LINE_COLOR = (100, 100, 100)
-RECT_COLOR = (150, 150, 150)
-SCR_FILL_COLOR = 'black'
+LINE_COLOR = (173, 181, 189)
+RECT_COLOR = (173, 181, 189)
+SCR_FILL_COLOR = (33, 37, 41)
 
 number_images_dict = {
     0: 'images/number_0.png',
