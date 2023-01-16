@@ -11,11 +11,12 @@ class GameField:
         """
         Initialization of a field of given sizes, where
         n -> amount of cells horizontally and vertically
-        m -> amount of mines on the playing field.
+        m -> amount of mines on the playing field
+        game -> the class Game session for which the playing field is being initialized
         """
 
-        self.N = n    # amount of rows and cols
-        self.M = m    # amount of mines
+        self.N = n    # amount of rows and columns in matrix
+        self.M = m    # amount of mines on playing field
         self.game = game
         self.field = [[Cell(0, False, row, col) for col in range(self.N)] for row in range(self.N)]
 
