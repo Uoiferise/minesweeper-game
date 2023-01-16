@@ -56,15 +56,17 @@ class GameField:
         cell = self.field[row][col]
         if cell.open is not True:
             if click == LEFT_MB:
-                cell.open = True
                 self.try_to_open_cell(cell)
-            elif click == RIGHT_MB:
                 cell.open = True
+            elif click == RIGHT_MB:
                 self.cell_mark_mine(cell)
+                cell.open = True
 
     def try_to_open_cell(self, cell):
         if cell.mine:
-            self.game.new_game()
+            # self.game.new_game()
+            self.cell_mark_mine(cell)
+            self.open_all_cell()
         elif cell.around_mines == 0:
             self.game.map.draw_cell(cell.rect_coords,
                                     around_mines=False)
@@ -98,11 +100,16 @@ class GameField:
                 self.open_cell(self.field[row][col])
 
     def cell_mark_mine(self, cell):
-        rect_coords = (
-            cell.row * CELL_SIZE,
-            cell.col * CELL_SIZE,
-            CELL_SIZE,
-            CELL_SIZE
-        )
-        self.game.map.draw_cell(rect_coords,
+        self.game.map.draw_cell(cell.rect_coords,
                                 image_path=IMAGE_MINE)
+
+    def open_all_cell(self):
+        for row in range(self.N):
+            for col in range(self.N):
+                cell = self.field[row][col]
+                if cell.open:
+                    continue
+                if cell.mine:
+                    self.cell_mark_mine(cell)
+                else:
+                    self.open_cell(cell)

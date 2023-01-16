@@ -39,13 +39,17 @@ class Game:
 
     def check_events(self):
         for event in pg.event.get():
-            if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
+            if event.type == pg.QUIT:
                 self.end_game()
+
             if event.type == pg.MOUSEBUTTONDOWN:
                 if event.button == LEFT_MB:
                     self.game.check_coords(event.pos, event.button)
                 if event.button == RIGHT_MB:
                     self.game.check_coords(event.pos, event.button)
+
+            if event.type == pg.KEYDOWN:
+                self.new_game()
 
     def run(self):
         while True:

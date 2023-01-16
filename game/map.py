@@ -14,19 +14,19 @@ class Map:
                          LINE_COLOR,
                          (i * CELL_SIZE, 0),
                          (i * CELL_SIZE, HEIGHT),
-                         width=3)
+                         width=LINE_WIGHT)
 
             pg.draw.line(self.screen,
                          LINE_COLOR,
                          (0, i * CELL_SIZE),
                          (WIDTH, i * CELL_SIZE),
-                         width=3)
+                         width=LINE_WIGHT)
 
     def draw_field(self):
         self.screen.fill(SCR_FILL_COLOR)
         self.draw_map_net()
 
-    def draw_cell(self, r_coords, image_path=IMAGE_ERROR, around_mines=True):
+    def draw_cell(self, r_coords: tuple, image_path: str = IMAGE_ERROR, around_mines=True):
         rect = pg.Rect(r_coords)
         pg.draw.rect(self.screen, RECT_COLOR, rect, 0)
 
