@@ -29,7 +29,8 @@ class GameField:
             for col in range(self.N):
                 self.field[row][col].around_mines = self.sum_around_mines(row, col)
 
-    def generate_random_mines(self, n, m):
+    @staticmethod
+    def generate_random_mines(n, m):
         mines = []
         while len(mines) < m:
             mine_cell = (randint(0, n-1), randint(0, n-1))
