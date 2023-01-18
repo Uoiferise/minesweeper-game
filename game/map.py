@@ -51,6 +51,12 @@ class Map:
                        image_path=IMAGE_ERROR,
                        around_mines=False)
 
+    def draw_cell_correct_mark(self, cell):
+        self.draw_cell(cell.rect_coords,
+                       rect_color=RECT_COLOR_FLAG_CORRECT,
+                       line_color=LINE_COLOR,
+                       image_path=IMAGE_FLAG)
+
     def draw_mine(self, cell):
         self.draw_cell(cell.rect_coords,
                        rect_color=RECT_COLOR_MINE,

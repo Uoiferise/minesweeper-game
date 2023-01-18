@@ -51,7 +51,8 @@ class Game:
                     self.game.check_coords(event.pos, event.button)
 
             if event.type == pg.KEYDOWN:
-                self.new_game()
+                if pg.key.get_pressed()[pg.K_SPACE]:
+                    self.new_game()
 
     def run(self):
         while True:

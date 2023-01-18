@@ -25,6 +25,9 @@ class Cell:
         'open': {
             'type': bool,
             'error': 'attribute "open" must be bool type'},
+        'mark': {
+            'type': bool,
+            'error': 'attribute "mark" must be bool type'},
         }
 
     @classmethod
@@ -58,6 +61,7 @@ class Cell:
         col -> column of the playing field in which the cell is initialized
         rect_coords -> the coordinates of the rectangle that this cell belongs to on the map
         open -> cell open and closed flag
+        mark -> cell marked and unmarked flag
         """
 
         self.validation('around_mines', around_mines)
@@ -79,6 +83,7 @@ class Cell:
             self.__CELL_SIZE
             )
         self.open = False
+        self.mark = False
 
     def __setattr__(self, key, value):
         if key not in self.__CELL_ATTRIBUTES_ERROR.keys():

@@ -19,7 +19,11 @@ class GameField:
         self.game = game
         self.field = [[Cell(0, False, row, col) for col in range(self.N)] for row in range(self.N)]
 
-        self.generate_random_mines(self.N, self.M)
+        self.mines = self.generate_random_mines(self.N, self.M)
+
+        for cell in self.mines:
+            row, col = cell
+            self.field[row][col].mine = True
 
         for row in range(self.N):
             for col in range(self.N):
@@ -31,9 +35,7 @@ class GameField:
             mine_cell = (randint(0, n-1), randint(0, n-1))
             if mine_cell not in mines:
                 mines.append(mine_cell)
-        for cell in mines:
-            row, col = cell
-            self.field[row][col].mine = True
+        return mines
 
     def sum_around_mines(self, r, c):
         total_around_mines = 0
@@ -77,12 +79,15 @@ class GameField:
                 self.try_to_open_cell(cell)
                 cell.open = True
         elif click == RIGHT_MB:
-            if cell.open:
-                self.game.map.cell_remark_mine(cell)
-                cell.open = False
-            else:
-                self.game.map.cell_mark_mine(cell)
-                cell.open = True
+            if cell.open is not True:
+                if cell.mark:
+                    self.game.map.cell_remark_mine(cell)
+                    cell.mark = False
+                    self.check_win_game()
+                else:
+                    self.game.map.cell_mark_mine(cell)
+                    cell.mark = True
+                    self.check_win_game()
 
     def open_cell(self, cell):
         if cell.open is not True:
@@ -116,6 +121,27 @@ class GameField:
             for col in range(self.N):
                 cell = self.field[row][col]
                 if cell.mine:
-                    self.game.map.draw_mine(cell)
+                    if cell.mark:
+                        self.game.map.draw_cell_correct_mark(cell)
+                    else:
+                        self.game.map.draw_mine(cell)
                 else:
                     self.open_cell(cell)
+
+    def check_win_game(self):
+        total_score = 0
+        for row in range(self.N):
+            for col in range(self.N):
+                cell = self.field[row][col]
+                if cell.mine is not True:
+                    if cell.mark:
+                        total_score = -1
+                        break
+                else:
+                    if cell.mark:
+                        total_score += 1
+            if total_score == -1:
+                break
+
+        if total_score == self.M:
+            self.open_all_cell()
