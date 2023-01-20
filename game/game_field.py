@@ -68,11 +68,11 @@ class GameField:
         cell = self.field[row][col]
 
         if click == LEFT_MB:
-            if cell.open is not True:
+            if not cell.open:
                 self.try_to_open_cell(cell)
                 cell.open = True
         elif click == RIGHT_MB:
-            if cell.open is not True:
+            if not cell.open:
                 if cell.mark:
                     self.game.map.cell_remark_mine(cell)
                     cell.mark = False
@@ -83,7 +83,7 @@ class GameField:
                     self.check_win_game()
 
     def open_cell(self, cell):
-        if cell.open is not True:
+        if not cell.open:
             cell.open = True
             if cell.around_mines == 0:
                 self.game.map.draw_cell_zero_mine_around(cell)
@@ -119,7 +119,7 @@ class GameField:
         for row in range(self.N):
             for col in range(self.N):
                 cell = self.field[row][col]
-                if cell.mine is not True:
+                if not cell.mine:
                     if cell.mark:
                         total_score = -1
                         break
