@@ -30,15 +30,14 @@ class GameField:
                 self.field[row][col].around_mines = self.sum_around_mines(row, col)
 
     @staticmethod
-    def generate_random_mines(n, m):
-        mines = []
+    def generate_random_mines(n: int, m: int) -> set:
+        mines = set()
         while len(mines) < m:
             mine_cell = (randint(0, n-1), randint(0, n-1))
-            if mine_cell not in mines:
-                mines.append(mine_cell)
+            mines.add(mine_cell)
         return mines
 
-    def sum_around_mines(self, r, c):
+    def sum_around_mines(self, r: int, c: int) -> int:
         total_around_mines = 0
         for row in range(r-1, r+2):
             if row == -1 or row > self.N-1:
@@ -58,17 +57,10 @@ class GameField:
             self.game.map.draw_mine(cell)
             self.open_all_cell()
         elif cell.around_mines == 0:
-            self.game.map.draw_cell(cell.rect_coords,
-                                    rect_color=RECT_COLOR,
-                                    line_color=LINE_COLOR,
-                                    around_mines=False)
+            self.game.map.draw_cell_zero_mine_around(cell)
             self.open_around_cells(cell)
         else:
-            self.game.map.draw_cell(cell.rect_coords,
-                                    rect_color=RECT_COLOR,
-                                    line_color=LINE_COLOR,
-                                    image_path=number_images_dict.get(cell.around_mines,
-                                                                      IMAGE_ERROR))
+            self.game.map.draw_cell_with_number(cell)
 
     def check_coords(self, pos: tuple, click: int):
         row = int(pos[0] // CELL_SIZE)
@@ -94,17 +86,10 @@ class GameField:
         if cell.open is not True:
             cell.open = True
             if cell.around_mines == 0:
-                self.game.map.draw_cell(cell.rect_coords,
-                                        rect_color=RECT_COLOR,
-                                        line_color=LINE_COLOR,
-                                        around_mines=False)
+                self.game.map.draw_cell_zero_mine_around(cell)
                 self.open_around_cells(cell)
             else:
-                self.game.map.draw_cell(cell.rect_coords,
-                                        rect_color=RECT_COLOR,
-                                        line_color=LINE_COLOR,
-                                        image_path=number_images_dict.get(cell.around_mines,
-                                                                          IMAGE_ERROR))
+                self.game.map.draw_cell_with_number(cell)
 
     def open_around_cells(self, cell):
         for row in range(cell.row - 1, cell.row + 2):

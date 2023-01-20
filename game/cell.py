@@ -31,12 +31,12 @@ class Cell:
         }
 
     @classmethod
-    def validation_of_types(cls, key: str, value):
+    def validation_of_types(cls, key: str, value: any):
         if isinstance(value, cls.__CELL_ATTRIBUTES_ERROR[key]['type']) is not True:
             raise TypeError(cls.__CELL_ATTRIBUTES_ERROR[key]['error'])
 
     @staticmethod
-    def validation_of_values(key: str, value):
+    def validation_of_values(key: str, value: any):
         if key == 'around_mines':
             if value < 0 or value >= 9:
                 raise ValueError(f'"{key}" value must be between 0 and 8')
@@ -48,7 +48,7 @@ class Cell:
                 raise ValueError(f'The number of elements of the tuple must be 4')
 
     @classmethod
-    def validation(cls, key: str, value):
+    def validation(cls, key: str, value: any):
         cls.validation_of_types(key, value)
         cls.validation_of_values(key, value)
 
@@ -85,7 +85,7 @@ class Cell:
         self.open = False
         self.mark = False
 
-    def __setattr__(self, key, value):
+    def __setattr__(self, key: str, value: any):
         if key not in self.__CELL_ATTRIBUTES_ERROR.keys():
             raise AttributeError('It is forbidden to create new attributes of an object of class "Cell"')
         self.validation(key, value)

@@ -2,19 +2,11 @@ import pygame as pg
 import sys
 from map import Map
 from game_field import GameField
-# from tests import run_tests
 from settings import *
 
 
 class Game:
     """Description will be later ... maybe"""
-
-    # __NEW_GAME = None
-    #
-    # def __new__(cls, *args, **kwargs):
-    #     if cls.__NEW_GAME is None:
-    #         cls.__NEW_GAME = super().__new__(cls)
-    #     return cls.__NEW_GAME
 
     def __init__(self):
         pg.init()
@@ -61,7 +53,6 @@ class Game:
 
 
 def main():
-    # run_tests()
     game = Game()
     game.run()
 
