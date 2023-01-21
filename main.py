@@ -35,11 +35,7 @@ class Game:
                 self.end_game()
 
             if event.type == pg.MOUSEBUTTONDOWN:
-                if event.button == LEFT_MB:
-
-                    self.game.check_coords(event.pos, event.button)
-                if event.button == RIGHT_MB:
-
+                if event.button in (LEFT_MB, RIGHT_MB):
                     self.game.check_coords(event.pos, event.button)
 
             if event.type == pg.KEYDOWN:
