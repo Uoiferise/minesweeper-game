@@ -38,6 +38,12 @@ class Map:
             image_rect.centery = rect.centery
             self.screen.blit(image, image_rect)
 
+    def draw_cell_with_number(self, cell):
+        self.draw_cell(cell.rect_coords,
+                       rect_color=RECT_COLOR,
+                       line_color=LINE_COLOR,
+                       image_path=number_images_dict.get(cell.around_mines, IMAGE_ERROR))
+
     def cell_mark_mine(self, cell):
         self.draw_cell(cell.rect_coords,
                        rect_color=RECT_COLOR_FLAG,
@@ -62,3 +68,9 @@ class Map:
                        rect_color=RECT_COLOR_MINE,
                        line_color=LINE_COLOR,
                        image_path=IMAGE_MINE)
+
+    def draw_cell_zero_mine_around(self, cell):
+        self.draw_cell(cell.rect_coords,
+                       rect_color=RECT_COLOR,
+                       line_color=LINE_COLOR,
+                       around_mines=False)

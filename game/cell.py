@@ -6,8 +6,6 @@ class Cell:
 
     __CELL_SIZE = CELL_SIZE
 
-    __slots__ = ('around_mines', 'mine', 'row', 'col', 'rect_coords', 'open', 'mark')
-
     __CELL_ATTRIBUTES_ERROR = {
         'around_mines': {
             'type': int,
@@ -88,5 +86,7 @@ class Cell:
         self.mark = False
 
     def __setattr__(self, key, value):
+        if key not in self.__CELL_ATTRIBUTES_ERROR.keys():
+            raise AttributeError('It is forbidden to create new attributes of an object of class "Cell"')
         self.validation(key, value)
         object.__setattr__(self, key, value)

@@ -1,6 +1,6 @@
 # game settings
 GAME_TITLE = 'Minesweeper game'.upper()
-RES = WIDTH, HEIGHT = 800, 800
+RES = WIDTH, HEIGHT = 900, 900
 
 AMOUNT_OF_CELLS = 10
 AMOUNT_OF_MINES = 12
