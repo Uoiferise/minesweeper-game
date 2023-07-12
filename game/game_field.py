@@ -1,6 +1,6 @@
-from cell import Cell
+from .cell import Cell
 from random import randint
-from settings import *
+from .settings import *
 
 
 class GameField:

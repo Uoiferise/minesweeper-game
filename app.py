@@ -1,8 +1,8 @@
 import pygame as pg
 import sys
-from map import Map
-from game_field import GameField
-from settings import *
+from game import Map
+from game import GameField
+from game.settings import GAME_TITLE, RES, AMOUNT_OF_MINES, AMOUNT_OF_CELLS, LEFT_MB, RIGHT_MB
 
 
 class Game:
